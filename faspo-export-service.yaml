@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: faspo-export-service
+  namespace: faspo-poc-argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: faspopocacr.azurecr.io/helm
+    chart: faspo-export-service
+    targetRevision: 0.0.0
+    helm:
+      valuesObject:
+        serviceAccount:
+          annotations:
+            azure.workload.identity/client-id: f4cf8b0d-8444-4741-8d85-1aebee4a1ad0
+        service:
+          type: ClusterIP
+          ports:
+            - name: http
+              port: 80
+              targetPort: 8080
+        podLabels:
+          azure.workload.identity/use: "true"
+        env:
+          - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+            value: SW5zdHJ1bWVudGF0aW9uS2V5PTViYzU1YTU5LTZkZGMtNDJjZS05ZTU3LTQ4ODQ4YWZkZTU4NTtJbmdlc3Rpb25FbmRwb2ludD1odHRwczovL2dlcm1hbnl3ZXN0Y2VudHJhbC0xLmluLmFwcGxpY2F0aW9uaW5zaWdodHMuYXp1cmUuY29tLztMaXZlRW5kcG9pbnQ9aHR0cHM6Ly9nZXJtYW55d2VzdGNlbnRyYWwubGl2ZWRpYWdub3N0aWNzLm1vbml0b3IuYXp1cmUuY29tLztBcHBsaWNhdGlvbklkPTYzYzM5NTc4LWUxM2MtNGRkNS05OTMxLTVjMTFjMTU3MGI3OA==
+            b64: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: faspo-poc-apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
