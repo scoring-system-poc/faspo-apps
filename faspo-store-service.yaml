@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: faspopocacr.azurecr.io/helm
     chart: faspo-store-service
-    targetRevision: 0.0.1
+    targetRevision: 0.0.0
     helm:
       valuesObject:
         serviceAccount:
