@@ -13,6 +13,9 @@ spec:
     targetRevision: 0.0.1
     helm:
       valuesObject:
+        serviceAccount:
+          annotations:
+            azure.workload.identity/client-id: null
         service:
           type: ClusterIP
           ports:
