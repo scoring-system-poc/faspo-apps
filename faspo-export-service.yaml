@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: faspopocacr.azurecr.io/helm
     chart: faspo-export-service
-    targetRevision: 0.0.0
+    targetRevision: 0.0.1
     helm:
       valuesObject:
         serviceAccount:
