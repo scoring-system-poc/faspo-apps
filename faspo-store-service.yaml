@@ -27,9 +27,9 @@ spec:
           azure.workload.identity/use: "true"
         env:
           - name: COSMOS_URL
-            value: https://faspo-poc-test-db.documents.azure.com:443/
+            value: https://faspo-poc-cdb.documents.azure.com:443/
           - name: COSMOS_DB
-            value: faspo-poc-test-db
+            value: faspo-poc-cdb
           - name: APPLICATIONINSIGHTS_STATSBEAT_DISABLED_ALL  # azure-sdk-for-python/issues/34804 @ GHB
             value: "true"
           - name: APPLICATIONINSIGHTS_CONNECTION_STRING
