@@ -14,6 +14,7 @@ spec:
     helm:
       valuesObject:
         serviceAccount:
+          name: faspo-poc-store-service-sa
           annotations:
             azure.workload.identity/client-id: 2e7f4027-ed5c-4544-8f64-716b3b992fa5
         service:
@@ -29,8 +30,6 @@ spec:
             value: https://faspo-poc-test-db.documents.azure.com:443/
           - name: COSMOS_DB
             value: faspo-poc-test-db
-          - name: AZURE_SUBSCRIPTION_ID
-            value: 00000000-0000-0000-0000-0000000000
           - name: APPLICATIONINSIGHTS_CONNECTION_STRING
             value: SW5zdHJ1bWVudGF0aW9uS2V5PTViYzU1YTU5LTZkZGMtNDJjZS05ZTU3LTQ4ODQ4YWZkZTU4NTtJbmdlc3Rpb25FbmRwb2ludD1odHRwczovL2dlcm1hbnl3ZXN0Y2VudHJhbC0xLmluLmFwcGxpY2F0aW9uaW5zaWdodHMuYXp1cmUuY29tLztMaXZlRW5kcG9pbnQ9aHR0cHM6Ly9nZXJtYW55d2VzdGNlbnRyYWwubGl2ZWRpYWdub3N0aWNzLm1vbml0b3IuYXp1cmUuY29tLztBcHBsaWNhdGlvbklkPTYzYzM5NTc4LWUxM2MtNGRkNS05OTMxLTVjMTFjMTU3MGI3OA==
             b64: true
