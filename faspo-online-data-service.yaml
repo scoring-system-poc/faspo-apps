@@ -25,9 +25,7 @@ spec:
           - name: DATA_SOURCE_URL
             value: https://monitor.statnipokladna.gov.cz/api/monitorws
           - name: DATA_TARGET_URL
-            value: http://faspo-store-service
-          - name: DATA_TARGET_ENDPOINT
-            value: /api/v1/document
+            value: http://faspo-store-service/api/v1/document
           - name: APPLICATIONINSIGHTS_STATSBEAT_DISABLED_ALL  # azure-sdk-for-python/issues/34804 @ GHB
             value: "true"
           - name: APPLICATIONINSIGHTS_CONNECTION_STRING
