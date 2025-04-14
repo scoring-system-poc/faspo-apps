@@ -14,6 +14,7 @@ spec:
     helm:
       valuesObject:
         serviceAccount:
+          name: faspo-poc-export-service-sa
           annotations:
             azure.workload.identity/client-id: f4cf8b0d-8444-4741-8d85-1aebee4a1ad0
         service:
@@ -25,9 +26,25 @@ spec:
         podLabels:
           azure.workload.identity/use: "true"
         env:
+          - name: COSMOS_URL
+            value: https://faspo-poc-cdb.documents.azure.com:443/
+          - name: COSMOS_DB
+            value: faspo-poc-cdb
+          - name: APPLICATIONINSIGHTS_STATSBEAT_DISABLED_ALL  # azure-sdk-for-python/issues/34804 @ GHB
+            value: "true"
           - name: APPLICATIONINSIGHTS_CONNECTION_STRING
             value: SW5zdHJ1bWVudGF0aW9uS2V5PTViYzU1YTU5LTZkZGMtNDJjZS05ZTU3LTQ4ODQ4YWZkZTU4NTtJbmdlc3Rpb25FbmRwb2ludD1odHRwczovL2dlcm1hbnl3ZXN0Y2VudHJhbC0xLmluLmFwcGxpY2F0aW9uaW5zaWdodHMuYXp1cmUuY29tLztMaXZlRW5kcG9pbnQ9aHR0cHM6Ly9nZXJtYW55d2VzdGNlbnRyYWwubGl2ZWRpYWdub3N0aWNzLm1vbml0b3IuYXp1cmUuY29tLztBcHBsaWNhdGlvbklkPTYzYzM5NTc4LWUxM2MtNGRkNS05OTMxLTVjMTFjMTU3MGI3OA==
             b64: true
+          - name: EXPORT_SETUP
+            value:
+              - name: foo
+                schedule_time: "00:00"
+                doc_types:
+                  - SC#1
+                  - SC#2
+                  - SC#3
+                  - SC#4
+                  - FR
   destination:
     server: https://kubernetes.default.svc
     namespace: faspo-poc-apps
