@@ -14,10 +14,11 @@ spec:
     helm:
       valuesObject:
         serviceAccount:
+          name: faspo-poc-request-handler-sa
           annotations:
             azure.workload.identity/client-id: 745df3b3-381a-46a9-a466-5ea7d43b2087
         service:
-          type: ClusterIP
+          type: LoadBalancer
           ports:
             - name: http
               port: 80
@@ -25,6 +26,20 @@ spec:
         podLabels:
           azure.workload.identity/use: "true"
         env:
+          - name: COSMOS_URL
+            value: https://faspo-poc-cdb.documents.azure.com:443/
+          - name: COSMOS_DB
+            value: faspo-poc-cdb
+          - name: ONLINE_DATA_SERVICE_URL
+            value: http://faspo-online-data-service/api/v1
+          - name: MODEL_SERVICE_URL
+            value: http://faspo-model-service/api/v1
+          - name: EXPORT_SERVICE_URL
+            value: http://faspo-export-service/api/v1
+          - name: STORE_SERVICE_URL # this is only temporary (for subject creation)
+            value: http://faspo-store-service/api/v1
+          - name: APPLICATIONINSIGHTS_STATSBEAT_DISABLED_ALL  # azure-sdk-for-python/issues/34804 @ GHB
+            value: "true"
           - name: APPLICATIONINSIGHTS_CONNECTION_STRING
             value: SW5zdHJ1bWVudGF0aW9uS2V5PTViYzU1YTU5LTZkZGMtNDJjZS05ZTU3LTQ4ODQ4YWZkZTU4NTtJbmdlc3Rpb25FbmRwb2ludD1odHRwczovL2dlcm1hbnl3ZXN0Y2VudHJhbC0xLmluLmFwcGxpY2F0aW9uaW5zaWdodHMuYXp1cmUuY29tLztMaXZlRW5kcG9pbnQ9aHR0cHM6Ly9nZXJtYW55d2VzdGNlbnRyYWwubGl2ZWRpYWdub3N0aWNzLm1vbml0b3IuYXp1cmUuY29tLztBcHBsaWNhdGlvbklkPTYzYzM5NTc4LWUxM2MtNGRkNS05OTMxLTVjMTFjMTU3MGI3OA==
             b64: true
