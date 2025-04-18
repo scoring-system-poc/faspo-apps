@@ -36,8 +36,6 @@ spec:
             value: http://faspo-model-service/api/v1
           - name: EXPORT_SERVICE_URL
             value: http://faspo-export-service/api/v1
-          - name: STORE_SERVICE_URL # this is only temporary (for subject creation)
-            value: http://faspo-store-service/api/v1
           - name: APPLICATIONINSIGHTS_STATSBEAT_DISABLED_ALL  # azure-sdk-for-python/issues/34804 @ GHB
             value: "true"
           - name: APPLICATIONINSIGHTS_CONNECTION_STRING
