@@ -14,8 +14,7 @@ spec:
     helm:
       valuesObject:
         serviceAccount:
-          annotations:
-            azure.workload.identity/client-id: null
+          name: faspo-poc-batch-data-service-sa
         service:
           type: ClusterIP
           ports:
